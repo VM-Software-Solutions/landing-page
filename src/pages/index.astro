@@ -1,13 +1,11 @@
 ---
-import Header from '../components/Header.astro';
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+const accept = Astro.request.headers.get('accept-language') ?? '';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Tomamos el primer idioma (ej: "es-AR,es;q=0.9,en;q=0.8")
+const primary = accept.split(',')[0]?.trim().toLowerCase() ?? '';
+
+// Si empieza con "es" => español, si no => inglés
+const isSpanish = primary.startsWith('es');
+
+return Astro.redirect(isSpanish ? '/es/' : '/en/', 302);
 ---
-
-<Layout>
-	<Header></Header>
-	<Welcome />
-</Layout>
