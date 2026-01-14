@@ -1,0 +1,51 @@
+---
+import { type Lang, getMessages } from '../i18n/messages';
+
+const { lang = 'es' } = Astro.props as { lang?: Lang };
+const t = getMessages(lang);
+
+const otherLang: Lang = lang === 'es' ? 'en' : 'es';
+const baseHref = otherLang === 'es' ? '/es/' : '/en/';
+
+// Mapa para traducir hashes (ES <-> EN)
+const hashMap =
+  lang === 'es'
+    ? {
+        [t.nav.home.href]: getMessages('en').nav.home.href,
+        [t.nav.features.href]: getMessages('en').nav.features.href,
+        [t.nav.contact.href]: getMessages('en').nav.contact.href,
+        [t.nav.testimonials.href]: getMessages('en').nav.testimonials.href,
+      }
+    : {
+        [t.nav.home.href]: getMessages('es').nav.home.href,
+        [t.nav.features.href]: getMessages('es').nav.features.href,
+        [t.nav.contact.href]: getMessages('es').nav.contact.href,
+        [t.nav.testimonials.href]: getMessages('es').nav.testimonials.href,
+      };
+---
+
+<a
+  href={baseHref}
+  class="lang-switch inline-flex items-center rounded border border-white/15 px-3 py-1 text-sm hover:bg-white/10"
+  data-base={baseHref}
+  data-map={JSON.stringify(hashMap)}
+>
+  {otherLang.toUpperCase()}
+</a>
+
+<script is:inline>
+  // Conserva la sección actual al cambiar idioma:
+  // - si el hash actual está mapeado, lo traduce
+  // - si no, lo mantiene tal cual
+  document.querySelectorAll('.lang-switch').forEach((el) => {
+    const base = el.getAttribute('data-base') || '/';
+    let map = {};
+    try { map = JSON.parse(el.getAttribute('data-map') || '{}'); } catch {}
+
+    const currentHash = window.location.hash || '';
+    const nextHash = map[currentHash] || currentHash;
+
+    // Si estás en /es/.../ o /en/.../ asegúrate de apuntar al index del otro idioma
+    el.setAttribute('href', base + nextHash);
+  });
+</script>

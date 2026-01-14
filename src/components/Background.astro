@@ -1,0 +1,314 @@
+---
+/**
+ * Fondo futurista con interacción al mover el mouse:
+ * - Grid "neón" en perspectiva
+ * - Glow/spotlight que sigue el cursor
+ * - Partículas suaves (puntos) con parallax
+ *
+ * Uso:
+ * <Background />
+ * (idealmente como primer elemento del layout; queda detrás con z-index)
+ */
+---
+
+<div class="bgfx" aria-hidden="true">
+  <canvas class="bgfx__canvas"></canvas>
+  <div class="bgfx__grid"></div>
+  <div class="bgfx__glow"></div>
+  <div class="bgfx__section-dim"></div>
+  <div class="bgfx__vignette"></div>
+
+</div>
+
+<script is:inline>
+  const root = document.currentScript?.previousElementSibling; // .bgfx
+  const canvas = root?.querySelector('.bgfx__canvas');
+  const glow = root?.querySelector('.bgfx__glow');
+
+  if (!root || !canvas || !glow) {
+    console.warn('[Background] No se pudo inicializar');
+  } else {
+    const ctx = canvas.getContext('2d', { alpha: true });
+
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+
+    // Heurística anti "zoom-out" / pantallas enormes:
+    // 1) si el dpr es muy bajo suele indicar zoom-out (ej: 0.8, 0.67, 0.5)
+    // 2) si el área efectiva es gigante, evitamos dibujar partículas
+    function shouldAnimateBackground() {
+      const dpr = window.devicePixelRatio || 1;
+      const w = window.innerWidth || 1;
+      const h = window.innerHeight || 1;
+
+      // Ajustables:
+      const MIN_DPR = 0.5;               // por debajo, asumimos zoom-out fuerte
+      const MAX_EFFECTIVE_PIXELS = 3_500_000; // ~3.5MP efectivos (ajustable)
+
+      const effectivePixels = w * h * Math.min(2, Math.max(0.5, dpr)) ** 2;
+
+      if (reduceMotion) return false;
+      if (dpr < MIN_DPR) return false;
+      if (effectivePixels > MAX_EFFECTIVE_PIXELS) return false;
+
+      return true;
+    }
+
+    let animationEnabled = shouldAnimateBackground();
+
+    // Si no animamos, ocultamos el canvas (opcional) para ahorrar aún más
+    if (!animationEnabled) {
+      canvas.style.display = 'none';
+      root.classList.add('bgfx--static');
+    }
+
+    const state = {
+      dpr: Math.max(1, Math.min(2, window.devicePixelRatio || 1)),
+      w: 0, h: 0,
+      mx: 0.5, my: 0.5,
+      tx: 0.5, ty: 0.5,
+      t: 0,
+      particles: []
+    };
+
+    function resize() {
+      // Si estamos en modo estático, igual actualizamos el dim del scroll, pero no canvas
+      if (!animationEnabled) return;
+
+      const rect = root.getBoundingClientRect();
+      state.w = Math.max(1, Math.floor(rect.width));
+      state.h = Math.max(1, Math.floor(rect.height));
+      canvas.width = Math.floor(state.w * state.dpr);
+      canvas.height = Math.floor(state.h * state.dpr);
+      canvas.style.width = state.w + 'px';
+      canvas.style.height = state.h + 'px';
+      ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
+
+      const count = Math.floor((state.w * state.h) / 22000);
+      state.particles = Array.from({ length: Math.max(45, Math.min(180, count)) }, () => ({
+        x: Math.random() * state.w,
+        y: Math.random() * state.h,
+        r: 0.6 + Math.random() * 1.6,
+        s: 0.15 + Math.random() * 0.65,
+        o: 0.18 + Math.random() * 0.35
+      }));
+    }
+
+    function setMouseFromEvent(e) {
+      const rect = root.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      state.tx = Math.max(0, Math.min(1, x));
+      state.ty = Math.max(0, Math.min(1, y));
+    }
+
+    // Dim al salir del hero (esto sí corre siempre)
+  function getHeroEl() {
+    return (
+        document.querySelector('section[data-hero]') ||
+        document.querySelector('section#inicio, section#home')
+      );
+  }
+  function updateSectionDim() {
+    const hero = getHeroEl();
+    if (!hero) return;
+
+    const rect = hero.getBoundingClientRect();
+    const heroHeight = Math.max(1, rect.height);
+
+    const progress = 1 - Math.min(1, Math.max(0, rect.bottom / heroHeight));
+    const eased = Math.min(1, Math.max(0, (progress - 0.15) / 0.85));
+
+    root.style.setProperty('--section-dim', eased.toFixed(3));
+  } 
+
+  window.addEventListener('scroll', updateSectionDim, { passive: true });
+  window.addEventListener('resize', updateSectionDim, { passive: true });
+  
+  updateSectionDim();
+    function tick() {
+      if (!animationEnabled) return;
+
+      state.t += 1 / 60;
+
+      state.mx += (state.tx - state.mx) * 0.06;
+      state.my += (state.ty - state.my) * 0.06;
+
+      glow.style.setProperty('--mx', (state.mx * 100).toFixed(2) + '%');
+      glow.style.setProperty('--my', (state.my * 100).toFixed(2) + '%');
+
+      ctx.clearRect(0, 0, state.w, state.h);
+
+      const cx = state.mx * state.w;
+      const cy = state.my * state.h;
+
+      for (const p of state.particles) {
+        p.y -= p.s;
+        if (p.y < -10) {
+          p.y = state.h + 10;
+          p.x = Math.random() * state.w;
+        }
+
+        const dx = (p.x - cx);
+        const dy = (p.y - cy);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        const near = Math.max(0, 1 - dist / 280);
+        const alpha = p.o + near * 0.30;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(120, 210, 255, ${alpha.toFixed(3)})`;
+        ctx.arc(
+          p.x + (state.mx - 0.5) * 12,
+          p.y + (state.my - 0.5) * 8,
+          p.r + near * 0.8,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+
+        if (near > 0.55) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(170, 110, 255, ${(near * 0.18).toFixed(3)})`;
+          ctx.lineWidth = 1;
+          ctx.arc(p.x, p.y, (p.r + 8) * near, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    const onMove = (e) => setMouseFromEvent(e);
+    const onTouch = (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      setMouseFromEvent(e.touches[0]);
+    };
+
+    // Re-evaluar en resize (por si el usuario cambia zoom / tamaño)
+    function onResize() {
+      const nextEnabled = shouldAnimateBackground();
+
+      if (nextEnabled !== animationEnabled) {
+        animationEnabled = nextEnabled;
+
+        if (!animationEnabled) {
+          canvas.style.display = 'none';
+          root.classList.add('bgfx--static');
+        } else {
+          canvas.style.display = '';
+          root.classList.remove('bgfx--static');
+          state.dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+          resize();
+          requestAnimationFrame(tick);
+        }
+      }
+
+      resize();
+      updateSectionDim();
+    }
+
+    window.addEventListener('scroll', updateSectionDim, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('touchmove', onTouch, { passive: true });
+    window.addEventListener('mouseleave', () => { state.tx = 0.5; state.ty = 0.35; }, { passive: true });
+
+    // init
+    updateSectionDim();
+    if (animationEnabled) {
+      resize();
+      state.tx = 0.5; state.ty = 0.35;
+      state.mx = state.tx; state.my = state.ty;
+      requestAnimationFrame(tick);
+    }
+  }
+</script>
+
+<style>
+  .bgfx {
+    position: fixed;
+    inset: 0;
+    z-index: -1;            /* no negativo */
+    pointer-events: none;  /* no bloquear header/links */
+    overflow: hidden;
+    background:
+      radial-gradient(1200px 800px at 20% 10%, rgba(140, 120, 255, 0.18), transparent 55%),
+      radial-gradient(900px 600px at 80% 20%, rgba(60, 200, 255, 0.14), transparent 55%),
+      radial-gradient(800px 700px at 55% 80%, rgba(0, 255, 200, 0.10), transparent 60%),
+      #050711;
+    --section-dim: 0;
+  }
+
+  .bgfx__section-dim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    /* Tinte grisáceo + blur suave progresivo */
+    background: rgba(120, 120, 130, calc(var(--section-dim) * 0.18));
+    backdrop-filter: blur(calc(var(--section-dim) * 10px)) saturate(calc(1.0 - var(--section-dim) * 0.15));
+    -webkit-backdrop-filter: blur(calc(var(--section-dim) * 10px)) saturate(calc(1.0 - var(--section-dim) * 0.15));
+
+    transition: background 120ms linear, backdrop-filter 120ms linear;
+  }
+
+  .bgfx__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: screen;
+    opacity: 0.95;
+  }
+
+  /* Grid futurista en perspectiva */
+  .bgfx__grid {
+    position: absolute;
+    inset: -20vh -20vw;
+    background-image:
+      linear-gradient(to right, rgba(90, 200, 255, 0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(160, 120, 255, 0.10) 1px, transparent 1px);
+    background-size: 64px 64px;
+    transform-origin: center;
+    transform: perspective(900px) rotateX(62deg) translateY(18vh);
+    filter: drop-shadow(0 0 12px rgba(90, 200, 255, 0.18));
+    opacity: 0.55;
+    animation: bgfx-grid-float 8s ease-in-out infinite;
+  }
+
+  @keyframes bgfx-grid-float {
+    0%, 100% { transform: perspective(900px) rotateX(62deg) translateY(18vh) translateX(0); }
+    50% { transform: perspective(900px) rotateX(62deg) translateY(18vh) translateX(-1.2vw); }
+  }
+
+  /* Glow que sigue el cursor (interacción principal) */
+  .bgfx__glow {
+    position: absolute;
+    inset: 0;
+    --mx: 50%;
+    --my: 35%;
+    background:
+      radial-gradient(420px 420px at var(--mx) var(--my), rgba(120, 210, 255, 0.22), transparent 60%),
+      radial-gradient(680px 520px at calc(var(--mx) + 6%) calc(var(--my) + 8%), rgba(190, 120, 255, 0.16), transparent 65%),
+      radial-gradient(900px 700px at var(--mx) var(--my), rgba(0, 255, 200, 0.08), transparent 70%);
+    mix-blend-mode: screen;
+    transition: filter 180ms ease;
+    filter: saturate(1.15) contrast(1.05);
+  }
+
+  .bgfx__vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1200px 900px at 50% 30%, transparent 35%, rgba(0, 0, 0, 0.55) 78%),
+      linear-gradient(to bottom, rgba(0,0,0,0.30), rgba(0,0,0,0.55));
+    pointer-events: none;
+  }
+
+  /* Respeta usuarios con reducción de movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .bgfx__grid { animation: none; }
+    .bgfx__glow { transition: none; }
+  }
+</style>

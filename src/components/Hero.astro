@@ -1,0 +1,41 @@
+---
+import { getMessages, type Lang } from '../i18n/messages';
+
+const { lang = 'es' } = Astro.props as { lang?: Lang };
+const t = getMessages(lang);
+
+const ids =
+  lang === 'es'
+    ? { home: 'inicio', features: 'features', contact: 'contacto' }
+    : { home: 'home', features: 'features', contact: 'contact' };
+---
+
+<section data-hero id={ids.home} class="relative z-10 min-h-[90vh] flex items-center">  
+    <div class="mx-auto max-w-6xl px-6 pt-20 pb-16">
+    <div class="max-w-3xl">
+      <h1 class="text-white font-semibold tracking-tight text-4xl md:text-6xl leading-tight">
+        {t.hero.title}
+      </h1>
+
+      <p class="mt-5 text-white/80 text-lg md:text-xl leading-relaxed">
+        {t.hero.subtitle}
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={t.nav.features.href}
+          class="inline-flex items-center rounded-md bg-white text-black px-5 py-3 font-medium hover:bg-white/90"
+        >
+          {t.hero.ctaPrimary}
+        </a>
+
+        <a
+          href={t.nav.contact.href}
+          class="inline-flex items-center rounded-md border border-white/20 text-white px-5 py-3 font-medium hover:bg-white/10"
+        >
+          {t.hero.ctaSecondary}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

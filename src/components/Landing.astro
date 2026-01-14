@@ -1,0 +1,62 @@
+---
+import { getMessages, type Lang } from '../i18n/messages';
+
+const { lang = 'es' } = Astro.props as { lang?: Lang };
+const t = getMessages(lang);
+
+// helper: "#features" -> "features"
+const idFromHref = (href: string) => href.startsWith('#') ? href.slice(1) : href;
+---
+
+<main class="relative z-10 pt-16">
+  <section id={idFromHref(t.nav.features.href)} class="mx-auto max-w-6xl px-6 py-20">
+    <h2 class="text-white text-3xl md:text-4xl font-semibold">{t.sections.features.title}</h2>
+    <p class="mt-3 text-white/75 max-w-2xl">{t.sections.features.subtitle}</p>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {t.sections.features.items.map((item) => (
+        <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-white">
+          <h3 class="font-semibold text-lg">{item.title}</h3>
+          <p class="mt-2 text-white/70">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id={idFromHref(t.nav.testimonials.href)} class="mx-auto max-w-6xl px-6 py-20">
+    <h2 class="text-white text-3xl md:text-4xl font-semibold">{t.sections.testimonials.title}</h2>
+    <p class="mt-3 text-white/75 max-w-2xl">{t.sections.testimonials.subtitle}</p>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {t.sections.testimonials.items.map((item) => (
+        <figure class="rounded-xl border border-white/10 bg-white/5 p-6 text-white">
+          <blockquote class="text-white/80">{item.quote}</blockquote>
+          <figcaption class="mt-4 text-white/60">— {item.author}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section id={idFromHref(t.nav.contact.href)} class="mx-auto max-w-6xl px-6 py-20">
+    <h2 class="text-white text-3xl md:text-4xl font-semibold">{t.sections.contact.title}</h2>
+    <p class="mt-3 text-white/75 max-w-2xl">{t.sections.contact.subtitle}</p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        class="rounded-md bg-emerald-400/90 px-5 py-3 font-medium text-black hover:bg-emerald-400"
+        href={t.sections.contact.whatsappHref}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {t.sections.contact.ctaWhatsApp}
+      </a>
+
+      <a
+        class="rounded-md border border-white/20 px-5 py-3 font-medium text-white hover:bg-white/10"
+        href={t.sections.contact.emailHref}
+      >
+        {t.sections.contact.ctaEmail}
+      </a>
+    </div>
+  </section>
+</main>
