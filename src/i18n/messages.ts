@@ -1,127 +1,104 @@
-export type Lang = 'es' | 'en';
+export type Lang = "es" | "en";
 
 export const messages = {
   es: {
     nav: {
-      home: { label: 'Inicio', href: '#inicio' },
-      features: { label: 'Características', href: '#features' },
-      contact: { label: 'Contacto', href: '#contacto' },
-      testimonials: { label: 'Testimonios', href: '#testimonios' },
+      home: { label: "Inicio", href: "#inicio" },
+      contact: { label: "Contacto", href: "#contacto" },
+      slider: { label: "Compañías", href: "#companias" },
     },
     hero: {
-      title: 'Desarrollamos software a medida',
-      subtitle: 'Webs, sistemas y automatizaciones con foco en performance, diseño y resultados.',
-      ctaPrimary: 'Ver características',
-      ctaSecondary: 'Contactar',
+      title: "Desarrollamos software a medida",
+      subtitle:
+        "Webs, sistemas y automatizaciones con foco en performance, diseño y resultados.",
+      ctaPrimary: "Ver características",
+      ctaSecondary: "Contactar",
     },
     sections: {
-      features: {
-        title: 'Características',
-        subtitle: 'Soluciones pensadas para crecer: rápidas, escalables y fáciles de mantener.',
+      slider: {
+        title: "Compañías",
+        subtitle: "Algunas de las compañías con las que trabajamos.",
         items: [
           {
-            title: 'Webs rápidas',
-            description: 'Landing pages y sitios con SEO, performance y diseño moderno.',
+            name: "Compañía 1",
+            description: "",
+            logo: "compania1.png",
           },
           {
-            title: 'Sistemas a medida',
-            description: 'Paneles, usuarios/roles, integraciones y flujos de negocio.',
+            name: "Compañía 2",
+            description: "",
+            logo: "compania2.png",
           },
           {
-            title: 'Automatización',
-            description: 'APIs, procesos, scraping y tareas repetitivas automatizadas.',
-          },
-        ],
-      },
-      testimonials: {
-        title: 'Testimonios',
-        subtitle: 'Algunos comentarios de clientes y proyectos.',
-        items: [
-          {
-            quote: '“Excelente laburo, entregas rápidas y comunicación clara.”',
-            author: 'Cliente',
-          },
-          {
-            quote: '“El sitio quedó muy rápido y mejoró el SEO.”',
-            author: 'Cliente',
+            name: "Compañía 3",
+            description: "",
+            logo: "compania3.png",
           },
         ],
       },
       contact: {
-        title: 'Contacto',
-        subtitle: 'Cuéntanos lo qué necesitas y hagámoslo realidad juntos.',
-        ctaWhatsApp: 'WhatsApp',
-        ctaEmail: 'Email',
+        title: "Contacto",
+        subtitle: "Cuéntanos lo qué necesitas y hagámoslo realidad juntos.",
+        ctaWhatsApp: "WhatsApp",
+        ctaEmail: "Email",
         // poné tus datos reales:
-        whatsappHref: 'https://wa.me/543535693858',
-        emailHref: 'mailto:martincrosetto312@gmail.com',
+        whatsappHref: "https://wa.me/543535693858",
+        emailHref: "mailto:martincrosetto312@gmail.com",
       },
     },
     footer: {
-      tagline: 'Software a medida: webs, sistemas y automatizaciones.',
-      rights: 'Todos los derechos reservados.',
+      tagline: "Software a medida: webs, sistemas y automatizaciones.",
+      rights: "Todos los derechos reservados.",
     },
   },
 
   en: {
     nav: {
-      home: { label: 'Home', href: '#home' },
-      features: { label: 'Features', href: '#features' },
-      contact: { label: 'Contact', href: '#contact' },
-      testimonials: { label: 'Testimonials', href: '#testimonials' },
+      home: { label: "Home", href: "#home" },
+      contact: { label: "Contact", href: "#contact" },
+      slider: { label: "Companies", href: "#companies" },
     },
     hero: {
-      title: 'We build custom software',
-      subtitle: 'Websites, systems and automations focused on performance, design and results.',
-      ctaPrimary: 'See features',
-      ctaSecondary: 'Contact',
+      title: "We build custom software",
+      subtitle:
+        "Websites, systems and automations focused on performance, design and results.",
+      ctaPrimary: "See features",
+      ctaSecondary: "Contact",
     },
     sections: {
-      features: {
-        title: 'Features',
-        subtitle: 'Built to scale: fast, reliable and easy to maintain.',
+      slider: {
+        title: "Companies",
+        subtitle: "Some of the companies we have worked with.",
         items: [
           {
-            title: 'Fast websites',
-            description: 'Landing pages and sites with SEO, performance and modern UI.',
+            name: "Company 1",
+            description: "",
+            logo: "company1.png",
           },
           {
-            title: 'Custom systems',
-            description: 'Dashboards, auth/roles, integrations and business workflows.',
+            name: "Company 2",
+            description: "",
+            logo: "company2.png",
           },
           {
-            title: 'Automation',
-            description: 'APIs, process automation, scraping and repetitive tasks.',
-          },
-        ],
-      },
-      testimonials: {
-        title: 'Testimonials',
-        subtitle: 'A few notes from clients and projects.',
-        items: [
-          {
-            quote: '“Great work, fast delivery and clear communication.”',
-            author: 'Client',
-          },
-          {
-            quote: '“The website is extremely fast and SEO improved.”',
-            author: 'Client',
+            name: "Company 3",
+            description: "",
+            logo: "company3.png",
           },
         ],
       },
       contact: {
-        title: 'Contact',
-        subtitle: 'Tell us what you need and let’s make it happen together.',
-        ctaWhatsApp: 'WhatsApp',
-        ctaEmail: 'Email',
-        whatsappHref: 'https://wa.me/543535693858',
-        emailHref: 'mailto:martincrosetto312@gmail.com',
+        title: "Contact",
+        subtitle: "Tell us what you need and let’s make it happen together.",
+        ctaWhatsApp: "WhatsApp",
+        ctaEmail: "Email",
+        whatsappHref: "https://wa.me/543535693858",
+        emailHref: "mailto:martincrosetto312@gmail.com",
       },
-      
     },
     footer: {
-      tagline: 'Custom software: websites, systems and automation.',
-      rights: 'All rights reserved.',
+      tagline: "Custom software: websites, systems and automation.",
+      rights: "All rights reserved.",
     },
   },
 } as const;

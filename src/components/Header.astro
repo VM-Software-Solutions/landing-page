@@ -18,9 +18,8 @@ const langHref = otherLang === 'es' ? '/es/' : '/en/';
     <div class="ml-auto flex items-center gap-4">
       <ul class="hidden md:flex items-center gap-6">
         <li><a href={t.nav.home.href} class="hover:text-white/80">{t.nav.home.label}</a></li>
-        <li><a href={t.nav.features.href} class="hover:text-white/80">{t.nav.features.label}</a></li>
         <li><a href={t.nav.contact.href} class="hover:text-white/80">{t.nav.contact.label}</a></li>
-        <li><a href={t.nav.testimonials.href} class="hover:text-white/80">{t.nav.testimonials.label}</a></li>
+        <li><a href={t.nav.slider.href} class="hover:text-white/80">{t.nav.slider.label}</a></li>
       </ul>
 
       <!-- Switch de idioma (opcional) -->
@@ -37,9 +36,8 @@ const langHref = otherLang === 'es' ? '/es/' : '/en/';
 
         <div class="absolute right-0 mt-2 w-48 bg-gray-900/80 backdrop-blur-md border border-white/10 rounded shadow-lg py-2 z-20">
           <a href={t.nav.home.href} class="block px-4 py-2 hover:bg-white/10">{t.nav.home.label}</a>
-          <a href={t.nav.features.href} class="block px-4 py-2 hover:bg-white/10">{t.nav.features.label}</a>
           <a href={t.nav.contact.href} class="block px-4 py-2 hover:bg-white/10">{t.nav.contact.label}</a>
-          <a href={t.nav.testimonials.href} class="block px-4 py-2 hover:bg-white/10">{t.nav.testimonials.label}</a>
+          <a href={t.nav.slider.href} class="block px-4 py-2 hover:bg-white/10">{t.nav.slider.label}</a>
 
           <a href={langHref} class="block px-4 py-2 hover:bg-white/10 text-white/90">
             {otherLang.toUpperCase()}
