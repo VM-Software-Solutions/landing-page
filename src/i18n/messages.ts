@@ -150,3 +150,4 @@ export const messages = {
 export function getMessages(lang: Lang) {
   return messages[lang] ?? messages.es;
 }
+ 
