@@ -6,8 +6,8 @@ const t = getMessages(lang);
 
 const ids =
   lang === 'es'
-    ? { home: 'inicio', features: 'features', contact: 'contacto' }
-    : { home: 'home', features: 'features', contact: 'contact' };
+    ? { home: 'inicio', features: 'companias', contact: 'contacto' }
+    : { home: 'home', features: 'companies', contact: 'contact' };
 ---
 
 <section data-hero id={ids.home} class="relative z-10 min-h-[90vh] flex items-center">  
@@ -23,7 +23,7 @@ const ids =
 
       <div class="mt-8 flex flex-wrap gap-3">
         <a
-          href={t.nav.features.href}
+          href={t.nav.slider.href}
           class="inline-flex items-center rounded-md bg-white text-black px-5 py-3 font-medium hover:bg-white/90"
         >
           {t.hero.ctaPrimary}

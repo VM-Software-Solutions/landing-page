@@ -4,10 +4,9 @@ export const messages = {
   es: {
     nav: {
       home: { label: "Inicio", href: "#inicio" },
-      features: { label: "Características", href: "#features" },
       services: { label: "Servicios", href: "#services" },
       contact: { label: "Contacto", href: "#contacto" },
-      testimonials: { label: "Testimonios", href: "#testimonios" },
+      slider: { label: "Compañías", href: "#companias" },
     },
     hero: {
       title: "Desarrollamos software a medida",
@@ -17,28 +16,6 @@ export const messages = {
       ctaSecondary: "Contactar",
     },
     sections: {
-      features: {
-        title: "Características",
-        subtitle:
-          "Soluciones pensadas para crecer: rápidas, escalables y fáciles de mantener.",
-        items: [
-          {
-            title: "Webs rápidas",
-            description:
-              "Landing pages y sitios con SEO, performance y diseño moderno.",
-          },
-          {
-            title: "Sistemas a medida",
-            description:
-              "Paneles, usuarios/roles, integraciones y flujos de negocio.",
-          },
-          {
-            title: "Automatización",
-            description:
-              "APIs, procesos, scraping y tareas repetitivas automatizadas.",
-          },
-        ],
-      },
       services: {
         title: "Servicios",
         subtitle: "Explora las soluciones que ofrecemos.",
@@ -60,17 +37,24 @@ export const messages = {
           },
         ],
       },
-      testimonials: {
-        title: "Testimonios",
-        subtitle: "Algunos comentarios de clientes y proyectos.",
+      slider: {
+        title: "Compañías",
+        subtitle: "Algunas de las compañías con las que trabajamos.",
         items: [
           {
-            quote: "“Excelente laburo, entregas rápidas y comunicación clara.”",
-            author: "Cliente",
+            name: "Compañía 1",
+            description: "",
+            logo: "compania1.png",
           },
           {
-            quote: "“El sitio quedó muy rápido y mejoró el SEO.”",
-            author: "Cliente",
+            name: "Compañía 2",
+            description: "",
+            logo: "compania2.png",
+          },
+          {
+            name: "Compañía 3",
+            description: "",
+            logo: "compania3.png",
           },
         ],
       },
@@ -93,10 +77,9 @@ export const messages = {
   en: {
     nav: {
       home: { label: "Home", href: "#home" },
-      features: { label: "Features", href: "#features" },
       services: { label: "Services", href: "#services" },
       contact: { label: "Contact", href: "#contact" },
-      testimonials: { label: "Testimonials", href: "#testimonials" },
+      slider: { label: "Companies", href: "#companies" },
     },
     hero: {
       title: "We build custom software",
@@ -106,27 +89,6 @@ export const messages = {
       ctaSecondary: "Contact",
     },
     sections: {
-      features: {
-        title: "Features",
-        subtitle: "Built to scale: fast, reliable and easy to maintain.",
-        items: [
-          {
-            title: "Fast websites",
-            description:
-              "Landing pages and sites with SEO, performance and modern UI.",
-          },
-          {
-            title: "Custom systems",
-            description:
-              "Dashboards, auth/roles, integrations and business workflows.",
-          },
-          {
-            title: "Automation",
-            description:
-              "APIs, process automation, scraping and repetitive tasks.",
-          },
-        ],
-      },
       services: {
         title: "Services",
         subtitle: "Explore the solutions we offer.",
@@ -148,17 +110,24 @@ export const messages = {
           },
         ],
       },
-      testimonials: {
-        title: "Testimonials",
-        subtitle: "A few notes from clients and projects.",
+      slider: {
+        title: "Companies",
+        subtitle: "Some of the companies we have worked with.",
         items: [
           {
-            quote: "“Great work, fast delivery and clear communication.”",
-            author: "Client",
+            name: "Company 1",
+            description: "",
+            logo: "company1.png",
           },
           {
-            quote: "“The website is extremely fast and SEO improved.”",
-            author: "Client",
+            name: "Company 2",
+            description: "",
+            logo: "company2.png",
+          },
+          {
+            name: "Company 3",
+            description: "",
+            logo: "company3.png",
           },
         ],
       },
