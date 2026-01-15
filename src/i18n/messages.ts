@@ -4,6 +4,7 @@ export const messages = {
   es: {
     nav: {
       home: { label: "Inicio", href: "#inicio" },
+      services: { label: "Servicios", href: "#services" },
       contact: { label: "Contacto", href: "#contacto" },
       slider: { label: "Compañías", href: "#companias" },
     },
@@ -15,6 +16,27 @@ export const messages = {
       ctaSecondary: "Contactar",
     },
     sections: {
+      services: {
+        title: "Servicios",
+        subtitle: "Explora las soluciones que ofrecemos.",
+        items: [
+          {
+            title: "Desarrollo Web",
+            description:
+              "Creación de sitios web personalizados y optimizados para SEO y rendimiento.",
+          },
+          {
+            title: "Sistemas a Medida",
+            description:
+              "Desarrollo de sistemas adaptados a las necesidades específicas de tu negocio.",
+          },
+          {
+            title: "Automatización de Procesos",
+            description:
+              "Implementación de soluciones para automatizar tareas repetitivas y mejorar la eficiencia.",
+          },
+        ],
+      },
       slider: {
         title: "Compañías",
         subtitle: "Algunas de las compañías con las que trabajamos.",
@@ -55,6 +77,7 @@ export const messages = {
   en: {
     nav: {
       home: { label: "Home", href: "#home" },
+      services: { label: "Services", href: "#services" },
       contact: { label: "Contact", href: "#contact" },
       slider: { label: "Companies", href: "#companies" },
     },
@@ -66,6 +89,27 @@ export const messages = {
       ctaSecondary: "Contact",
     },
     sections: {
+      services: {
+        title: "Services",
+        subtitle: "Explore the solutions we offer.",
+        items: [
+          {
+            title: "Web Development",
+            description:
+              "Creation of custom websites optimized for SEO and performance.",
+          },
+          {
+            title: "Custom Systems",
+            description:
+              "Development of systems tailored to the specific needs of your business.",
+          },
+          {
+            title: "Process Automation",
+            description:
+              "Implementation of solutions to automate repetitive tasks and improve efficiency.",
+          },
+        ],
+      },
       slider: {
         title: "Companies",
         subtitle: "Some of the companies we have worked with.",
