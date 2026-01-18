@@ -1,20 +1,13 @@
 ---
-// 👇 Este flag es **Requisito** para usar Astro.request.headers:
-export const prerender = false;
-
-const accept = Astro.request.headers.get('accept-language') ?? '';
-const primary = accept.split(',')[0]?.trim().toLowerCase() ?? '';
-const isSpanish = primary.startsWith('es');
-const target = isSpanish ? '/es/' : '/en/';
+/* Sin SSR — ¡Nada de export const prerender ni Astro.request.headers! */
 ---
 
 <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content={"2; url=" + target}>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VM Software Solutions</title>
-    <link rel="icon" type="image/png" href="/assets/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
     <style>
       html, body {
         margin: 0;
@@ -46,8 +39,11 @@ const target = isSpanish ? '/es/' : '/en/';
       }
       @keyframes spin { to { transform: rotate(360deg); } }
     </style>
-    <script is:inline>
+    <!-- Redirección por JS cliente -->
+    <script>
       setTimeout(function() {
+        var lang = navigator.language || "en";
+        var target = lang.startsWith('es') ? '/es/' : '/en/';
         window.location.replace(target);
       }, 1800);
     </script>
@@ -57,8 +53,16 @@ const target = isSpanish ? '/es/' : '/en/';
       <div class="loader"></div>
       <div>Redirigiendo a tu idioma preferido...</div>
       <div style="font-size:.9em;color:#8eeaf7;margin-top:.7em;">
-        Si no sucede automáticamente, haz <a href={target} style="color:#bafffd;text-decoration:underline;">clic aquí</a>.
+        Si no sucede automáticamente, haz 
+        <a id="manualLangLink" href="/en/" style="color:#bafffd;text-decoration:underline;">clic aquí</a>.
       </div>
     </div>
+    <!-- Cambia el link manual con JS también -->
+    <script>
+      var lang = navigator.language || "en";
+      var target = lang.startsWith('es') ? '/es/' : '/en/';
+      var link = document.getElementById('manualLangLink');
+      if (link && link instanceof HTMLAnchorElement) link.href = target;
+    </script>
   </body>
 </html>
