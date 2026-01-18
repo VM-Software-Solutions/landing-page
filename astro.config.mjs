@@ -6,6 +6,6 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [tailwind()],
-  output: "server",                      // 👈 MUY IMPORTANTE para SSR
+  output: "static",                     // 👈 Le decís a Astro que genere un sitio estático
   adapter: vercel(),                     // 👈 Le decís a Astro que use Vercel
 });
