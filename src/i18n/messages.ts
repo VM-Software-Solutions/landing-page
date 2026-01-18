@@ -4,15 +4,16 @@ export const messages = {
   es: {
     nav: {
       home: { label: "Inicio", href: "#inicio" },
-      services: { label: "Servicios", href: "#services" },
-      contact: { label: "Contacto", href: "#contacto" },
+      services: { label: "Servicios", href: "#servicios" },
+      team: { label: "Equipo", href: "#equipo" },
       slider: { label: "Compañías", href: "#companias" },
+      contact: { label: "Contacto", href: "#contacto" },
     },
     hero: {
       title: "Desarrollamos software a medida",
       subtitle:
         "Webs, sistemas y automatizaciones con foco en performance, diseño y resultados.",
-      ctaPrimary: "Ver características",
+      ctaPrimary: "Ver servicios", // <-- Actualizado
       ctaSecondary: "Contactar",
     },
     sections: {
@@ -63,9 +64,24 @@ export const messages = {
         subtitle: "Cuéntanos lo qué necesitas y hagámoslo realidad juntos.",
         ctaWhatsApp: "WhatsApp",
         ctaEmail: "Email",
-        // poné tus datos reales:
         whatsappHref: "https://wa.me/543535693858",
-        emailHref: "mailto:martincrosetto312@gmail.com",
+        emailHref: "mailto:software.vm.solutions@gmail.com",
+      },
+      team: {
+        title: "Equipo",
+        subtitle: "Conoce a nuestro equipo.",
+        members: [
+          {
+            name: "Martín Crosetto",
+            role: "Co-fundador y Desarrollador",
+            photo: "martin.jpeg",
+          },
+          {
+            name: "Valentino Lattanzi",
+            role: "Co-fundador y Desarrollador",
+            photo: "valentino.jpeg",
+          }
+        ]
       },
     },
     footer: {
@@ -78,14 +94,15 @@ export const messages = {
     nav: {
       home: { label: "Home", href: "#home" },
       services: { label: "Services", href: "#services" },
-      contact: { label: "Contact", href: "#contact" },
+      team: { label: "Team", href: "#team" },
       slider: { label: "Companies", href: "#companies" },
+      contact: { label: "Contact", href: "#contact" },
     },
     hero: {
       title: "We build custom software",
       subtitle:
         "Websites, systems and automations focused on performance, design and results.",
-      ctaPrimary: "See features",
+      ctaPrimary: "See services", 
       ctaSecondary: "Contact",
     },
     sections: {
@@ -137,17 +154,32 @@ export const messages = {
         ctaWhatsApp: "WhatsApp",
         ctaEmail: "Email",
         whatsappHref: "https://wa.me/543535693858",
-        emailHref: "mailto:martincrosetto312@gmail.com",
+        emailHref: "mailto:software.vm.solutions@gmail.com",
+      },
+      team: {
+        title: "Team",
+        subtitle: "Meet our team.",
+        members: [
+          {
+            name: "Martín Crosetto",
+            role: "Co-founder & Developer",
+            photo: "martin.jpeg",
+          },
+          {
+            name: "Valentino Lattanzi",
+            role: "Co-founder & Developer",
+            photo: "valentino.jpeg",
+          }
+        ]
       },
     },
     footer: {
       tagline: "Custom software: websites, systems and automation.",
       rights: "All rights reserved.",
     },
-  },
+  }
 } as const;
 
 export function getMessages(lang: Lang) {
   return messages[lang] ?? messages.es;
 }
- 
