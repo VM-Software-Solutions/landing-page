@@ -1,54 +1,69 @@
 ---
-import companyPlaceholder from '../assets/company.png';
-import martinImg from '../assets/martin.jpeg';
-import valentinoImg from '../assets/valentino.jpeg';
-import { getMessages, type Lang } from '../i18n/messages';
+import martinImg from "../assets/martin.jpeg";
+import valentinoImg from "../assets/valentino.jpeg";
+import { getMessages, type Lang } from "../i18n/messages";
+import Contact from "./Contact.astro";
 
-const { lang = 'es' } = Astro.props as { lang?: Lang };
+const { lang = "es" } = Astro.props as { lang?: Lang };
 const t = getMessages(lang);
 
-const idFromHref = (href: string) => href.startsWith('#') ? href.slice(1) : href;
+const idFromHref = (href: string) =>
+  href.startsWith("#") ? href.slice(1) : href;
 
 const photoMap: Record<string, { src: string }> = {
-  'martin.jpeg': martinImg,
-  'valentino.jpeg': valentinoImg,
+  "martin.jpeg": martinImg,
+  "valentino.jpeg": valentinoImg,
 };
 ---
 
 <main class="relative z-10 pt-16">
   <!-- Servicios -->
-  <section id={idFromHref(t.nav.services.href)} class="mx-auto max-w-6xl px-6 py-20">
-    <h2 class="text-white text-3xl md:text-4xl font-semibold">{t.sections.services.title}</h2>
+  <section
+    id={idFromHref(t.nav.services.href)}
+    class="mx-auto max-w-6xl px-6 py-20"
+  >
+    <h2 class="text-white text-3xl md:text-4xl font-semibold">
+      {t.sections.services.title}
+    </h2>
     <p class="mt-3 text-white/75 max-w-2xl">{t.sections.services.subtitle}</p>
 
     <div class="mt-10 grid gap-6 md:grid-cols-3">
-      {t.sections.services.items.map((item) => (
-        <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-white">
-          <h3 class="font-semibold text-lg">{item.title}</h3>
-          <p class="mt-2 text-white/70">{item.description}</p>
-        </div>
-      ))}
+      {
+        t.sections.services.items.map((item) => (
+          <div class="rounded-xl border border-white/10 bg-white/5 p-6 text-white">
+            <h3 class="font-semibold text-lg">{item.title}</h3>
+            <p class="mt-2 text-white/70">{item.description}</p>
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <!-- Equipo -->
- <section id={idFromHref(t.nav.team.href)} class="mx-auto max-w-6xl px-6 py-20">
-  <h2 class="text-white text-3xl md:text-4xl font-semibold">{t.sections.team.title}</h2>
-  <p class="mt-3 text-white/75 max-w-2xl">{t.sections.team.subtitle}</p>
-  <div class="mt-10 grid gap-6 md:grid-cols-2">
-    {t.sections.team.members.map(member => (
-      <div class="flex flex-col items-center rounded-xl border border-white/10 bg-white/5 p-6 text-white">
-        <img
-          src={photoMap[member.photo]?.src}
-          alt={member.name}
-          class="w-28 h-28 rounded-full object-cover border-2 border-white/20 shadow-lg mb-4"
-        />
-        <h3 class="font-semibold text-lg">{member.name}</h3>
-        <p class="mt-1 text-emerald-300 font-medium">{member.role}</p>
-      </div>
-    ))}
-  </div>
-</section>
+  <section
+    id={idFromHref(t.nav.team.href)}
+    class="mx-auto max-w-6xl px-6 py-20"
+  >
+    <h2 class="text-white text-3xl md:text-4xl font-semibold">
+      {t.sections.team.title}
+    </h2>
+    <p class="mt-3 text-white/75 max-w-2xl">{t.sections.team.subtitle}</p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {
+        t.sections.team.members.map((member) => (
+          <div class="flex flex-col items-center rounded-xl border border-white/10 bg-white/5 p-6 text-white">
+            <img
+              src={photoMap[member.photo]?.src}
+              alt={member.name}
+              class="w-28 h-28 rounded-full object-cover border-2 border-white/20 shadow-lg mb-4"
+            />
+            <h3 class="font-semibold text-lg">{member.name}</h3>
+            <p class="mt-1 text-emerald-300 font-medium">{member.role}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 
   <!-- Compañías/Slider -->
   <!-- <section id={idFromHref(t.nav.slider.href)} class="mx-auto max-w-6xl px-6 py-20">
@@ -76,46 +91,5 @@ const photoMap: Record<string, { src: string }> = {
   </section> -->
 
   <!-- Contacto -->
- <section id={idFromHref(t.nav.contact.href)} class="mx-auto max-w-6xl px-6 py-20">
-  <h2 class="text-white text-3xl md:text-4xl font-semibold">{t.sections.contact.title}</h2>
-  <p class="mt-3 text-white/75 max-w-2xl">{t.sections.contact.subtitle}</p>
-  <div class="mt-8 flex flex-wrap gap-3">
-    <a
-      class="rounded-md bg-emerald-400/90 px-5 py-3 font-medium text-black hover:bg-emerald-400"
-      href={t.sections.contact.whatsappHref}
-      target="_blank"
-      rel="noreferrer"
-    >
-      {t.sections.contact.ctaWhatsApp}
-    </a>
-    <a
-      class="rounded-md border border-white/20 px-5 py-3 font-medium text-white hover:bg-white/10"
-      href={t.sections.contact.emailHref}
-    >
-      {t.sections.contact.ctaEmail}
-    </a>
-    <a
-      class="rounded-md border border-white/20 px-5 py-3 font-medium text-white hover:bg-white/10"
-      href="https://mail.google.com/mail/?view=cm&to=software.vm.solutions@gmail.com"
-      target="_blank"
-      rel="noopener"
-      title="Enviar mail usando Gmail web"
-    >
-      Gmail Web
-    </a>
-    <button
-      class="rounded-md border border-white/20 px-5 py-3 font-medium text-white hover:bg-white/10"
-      type="button"
-      onclick="navigator.clipboard.writeText('software.vm.solutions@gmail.com');alert('Email copiado!')"
-      style="background: none;"
-    >
-      Copiar Email
-    </button>
-  </div>
-  <p class="text-xs text-white/50 mt-3">
-    {lang === 'es'
-      ? 'En computadoras, el botón “Email” abrirá tu app de correo predeterminada. Si prefieres usar Gmail Web, haz clic en “Gmail Web”.'
-      : 'On computers, the "Email" button will open your default email app. If you prefer to use Gmail Web, click on "Gmail Web".'}
-  </p>
-</section>
+  <Contact lang={lang} />
 </main>

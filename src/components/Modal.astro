@@ -1,0 +1,42 @@
+<div
+  id="success-modal"
+  class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+>
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+  <div
+    class="relative bg-white dark:bg-gray-900 rounded-2xl p-8 max-w-sm w-full shadow-2xl border border-gray-100 dark:border-gray-800 transform transition-all scale-95 opacity-0 duration-300"
+    id="modal-card"
+  >
+    <div class="flex flex-col items-center text-center">
+      <div
+        class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-4"
+      >
+        <svg
+          class="w-8 h-8 text-emerald-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        ¡Mensaje enviado!
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        Gracias por contactarnos. Te responderemos en menos de 24 horas.
+      </p>
+      <button
+        id="close-modal"
+        class="w-full py-3 bg-emerald-400 hover:bg-emerald-500 text-black font-bold rounded-lg transition-colors"
+      >
+        Entendido
+      </button>
+    </div>
+  </div>
+</div>
