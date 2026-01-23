@@ -1,9 +1,11 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwind from "@astrojs/tailwind";
+import { defineConfig } from "astro/config";
 
+import vercel from "@astrojs/vercel";
 
 export default defineConfig({
   integrations: [tailwind()],
-  output: "static",                     // 👈 Le decís a Astro que genere un sitio estático
+  output: "static",
+  adapter: vercel(),
 });
