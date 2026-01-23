@@ -1,6 +1,84 @@
+/**
+ * Interfaz de los mensajes de navegación.
+ */
+type NavItem = {
+  label: string;
+  href: string;
+};
+
+/**
+ * Interfaz de los mensajes de idioma.
+ */
+type Language = {
+  nav: {
+    home: NavItem;
+    services: NavItem;
+    team: NavItem;
+    slider: NavItem;
+    contact: NavItem;
+  };
+  hero: {
+    title: string;
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
+  sections: {
+    services: {
+      title: string;
+      subtitle: string;
+      items: {
+        title: string;
+        description: string;
+      }[];
+    };
+    slider: {
+      title: string;
+      subtitle: string;
+      items: {
+        name: string;
+        description: string;
+        logo: string;
+      }[];
+    };
+    contact: {
+      title: string;
+      subtitle: string;
+      ctaWhatsApp: string;
+      ctaEmail: string;
+      whatsappHref: string;
+      emailHref: string;
+      formHref: string;
+      labelEmail: string;
+      phEmail: string;
+      labelMessage: string;
+      phMessage: string;
+      ctaSubmit: string;
+    };
+    team: {
+      title: string;
+      subtitle: string;
+      members: {
+        name: string;
+        role: string;
+        photo: string;
+      }[];
+    };
+  };
+  footer: {
+    tagline: string;
+    rights: string;
+  };
+};
+
+type Message = {
+  es: Language;
+  en: Language;
+};
+
 export type Lang = "es" | "en";
 
-export const messages = {
+export const messages: Message = {
   es: {
     nav: {
       home: { label: "Inicio", href: "#inicio" },
@@ -66,6 +144,12 @@ export const messages = {
         ctaEmail: "Email",
         whatsappHref: "https://wa.me/543535693858",
         emailHref: "mailto:software.vm.solutions@gmail.com",
+        ctaSubmit: "Enviar",
+        formHref: "https://forms.gle/example", // <-- Actualizado
+        labelEmail: "Tu correo electrónico",
+        phEmail: "Tu correo electrónico",
+        labelMessage: "Tu mensaje",
+        phMessage: "Tu mensaje",
       },
       team: {
         title: "Equipo",
@@ -80,8 +164,8 @@ export const messages = {
             name: "Valentino Lattanzi",
             role: "Co-fundador y Desarrollador",
             photo: "valentino.jpeg",
-          }
-        ]
+          },
+        ],
       },
     },
     footer: {
@@ -102,7 +186,7 @@ export const messages = {
       title: "We build custom software",
       subtitle:
         "Websites, systems and automations focused on performance, design and results.",
-      ctaPrimary: "See services", 
+      ctaPrimary: "See services",
       ctaSecondary: "Contact",
     },
     sections: {
@@ -155,6 +239,12 @@ export const messages = {
         ctaEmail: "Email",
         whatsappHref: "https://wa.me/543535693858",
         emailHref: "mailto:software.vm.solutions@gmail.com",
+        ctaSubmit: "Send",
+        formHref: "https://forms.gle/example",
+        labelEmail: "Your email",
+        phEmail: "Your email",
+        labelMessage: "Your message",
+        phMessage: "Your message",
       },
       team: {
         title: "Team",
@@ -169,15 +259,15 @@ export const messages = {
             name: "Valentino Lattanzi",
             role: "Co-founder & Developer",
             photo: "valentino.jpeg",
-          }
-        ]
+          },
+        ],
       },
     },
     footer: {
       tagline: "Custom software: websites, systems and automation.",
       rights: "All rights reserved.",
     },
-  }
+  },
 } as const;
 
 export function getMessages(lang: Lang) {
