@@ -114,6 +114,11 @@ const idFromHref = (href: string) =>
           }
         });
 
+        // UI Loading
+        const originalText = btn.innerText;
+        btn.disabled = true;
+        btn.innerHTML = `<span class="animate-pulse">Enviando...</span>`;
+
         const formData = new FormData(form);
         const { data, error } = await actions.contact(formData);
 
@@ -140,6 +145,10 @@ const idFromHref = (href: string) =>
           toggleModal(true);
           form.reset();
         }
+
+        // Reset UI
+        btn.disabled = false;
+        btn.innerText = originalText;
       });
 
       closeBtn?.addEventListener("click", () => toggleModal(false));
