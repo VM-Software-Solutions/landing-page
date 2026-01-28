@@ -4,15 +4,24 @@
 
 <html lang="es">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta
+      name="google-site-verification"
+      content="Gylo4gOStk8e6Qz7V2E_uc9oMUejyixkcAzgAOBndpM"
+    />
     <title>VM Software Solutions</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
-        background: radial-gradient(circle at 60% 40%, #18293f 0%, #050711 100%);
+        background: radial-gradient(
+          circle at 60% 40%,
+          #18293f 0%,
+          #050711 100%
+        );
         min-height: 100dvh;
         height: 100dvh;
       }
@@ -23,7 +32,7 @@
         justify-content: center;
         flex-direction: column;
         color: #ededed;
-        font-family: 'Inter', 'Roboto', Arial, sans-serif;
+        font-family: "Inter", "Roboto", Arial, sans-serif;
         font-size: 1.25rem;
         text-shadow: 0 2px 16px #12122a88;
       }
@@ -37,13 +46,17 @@
         animation: spin 1.1s linear infinite;
         box-shadow: 0 0 16px #28ffff44;
       }
-      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
     <!-- Redirección por JS cliente -->
     <script>
-      setTimeout(function() {
+      setTimeout(function () {
         var lang = navigator.language || "en";
-        var target = lang.startsWith('es') ? '/es/' : '/en/';
+        var target = lang.startsWith("es") ? "/es/" : "/en/";
         window.location.replace(target);
       }, 1800);
     </script>
@@ -53,15 +66,19 @@
       <div class="loader"></div>
       <div>Redirigiendo a tu idioma preferido...</div>
       <div style="font-size:.9em;color:#8eeaf7;margin-top:.7em;">
-        Si no sucede automáticamente, haz 
-        <a id="manualLangLink" href="/en/" style="color:#bafffd;text-decoration:underline;">clic aquí</a>.
+        Si no sucede automáticamente, haz
+        <a
+          id="manualLangLink"
+          href="/en/"
+          style="color:#bafffd;text-decoration:underline;">clic aquí</a
+        >.
       </div>
     </div>
     <!-- Cambia el link manual con JS también -->
     <script>
       var lang = navigator.language || "en";
-      var target = lang.startsWith('es') ? '/es/' : '/en/';
-      var link = document.getElementById('manualLangLink');
+      var target = lang.startsWith("es") ? "/es/" : "/en/";
+      var link = document.getElementById("manualLangLink");
       if (link && link instanceof HTMLAnchorElement) link.href = target;
     </script>
   </body>
