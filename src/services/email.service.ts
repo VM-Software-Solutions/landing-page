@@ -6,9 +6,9 @@ import {
 
 type EmailResponse =
   | {
-      data: CreateEmailResponseSuccess;
-      error: null;
-      success: true;
+      data: CreateEmailResponseSuccess | null;
+      error: ErrorResponse | null;
+      success: boolean;
     }
   | {
       data: null;
@@ -26,7 +26,17 @@ export class EmailService {
   async sendContactEmail(
     emailFrom: string,
     message: string,
+    honeypot?: string
   ): Promise<EmailResponse> {
+    // Si el honeypot tiene contenido, es spam: no enviar email
+    if (honeypot && honeypot.trim() !== "") {
+      return {
+        data: null,
+        error: null,
+        success: true,
+      };
+    }
+
     const { data, error } = await this.resend.emails.send({
       from: "onboarding@resend.dev",
       to: "software.vm.solutions@gmail.com",

@@ -28,6 +28,7 @@ type Language = {
       title: string;
       subtitle: string;
       items: {
+        icon: string;
         title: string;
         description: string;
       }[];
@@ -88,31 +89,52 @@ export const messages: Message = {
       contact: { label: "Contacto", href: "#contacto" },
     },
     hero: {
-      title: "Desarrollamos software a medida",
+      title: "CONSTRUIMOS SISTEMAS DE INFORMACIÓN A MEDIDA",
       subtitle:
-        "Webs, sistemas y automatizaciones con foco en performance, diseño y resultados.",
-      ctaPrimary: "Ver servicios", // <-- Actualizado
+        "Enfocados en performance, diseño y resultados para que tu empresa dé el siguiente paso.",
+      ctaPrimary: "Ver servicios",
       ctaSecondary: "Contactar",
     },
     sections: {
       services: {
         title: "Servicios",
-        subtitle: "Explora las soluciones que ofrecemos.",
+        subtitle: "Somos profesionales en tecnología de la información. Proporcionamos soluciones para diferentes situaciones y necesidades.",
         items: [
           {
-            title: "Desarrollo Web",
+            icon: "web", // Desarrollo Web
+            title: "Sistemas Web",
             description:
-              "Creación de sitios web personalizados y optimizados para SEO y rendimiento.",
+              "Creamos sitios web personalizados, optimizados para SEO, rendimiento y experiencia de usuario.",
           },
           {
-            title: "Sistemas a Medida",
+            icon: "smartphone", // Desarrollo Mobile
+            title: "Sistemas Mobile",
             description:
-              "Desarrollo de sistemas adaptados a las necesidades específicas de tu negocio.",
+              "Aplicaciones móviles a medida para Android y iOS, adaptadas a las necesidades de tu negocio.",
           },
           {
+            icon: "computer", // Desarrollo Desktop
+            title: "Sistemas Desktop",
+            description:
+              "Sistemas de escritorio robustos y eficientes para plataformas Windows, Mac y Linux.",
+          },
+          {
+            icon: "settings", // Automatización de Procesos
             title: "Automatización de Procesos",
             description:
-              "Implementación de soluciones para automatizar tareas repetitivas y mejorar la eficiencia.",
+              "Soluciones para automatizar tareas repetitivas y mejorar la eficiencia operativa.",
+          },
+          {
+            icon: "build", // Sistemas a Medida
+            title: "Sistemas a Medida",
+            description:
+              "Desarrollo de sistemas personalizados que se adaptan a los procesos y objetivos de tu empresa.",
+          },
+          {
+            icon: "search", // Relevamiento y Consultoría
+            title: "Relevamiento y Consultoría",
+            description:
+              "Analizamos tus procesos y necesidades para definir la mejor solución tecnológica para tu negocio.",
           },
         ],
       },
@@ -139,13 +161,13 @@ export const messages: Message = {
       },
       contact: {
         title: "Contacto",
-        subtitle: "Cuéntanos lo qué necesitas y hagámoslo realidad juntos.",
+        subtitle: "Cuéntanos lo que necesitas y hagámoslo realidad juntos.",
         ctaWhatsApp: "WhatsApp",
         ctaEmail: "Email",
         whatsappHref: "https://wa.me/543535693858",
         emailHref: "mailto:software.vm.solutions@gmail.com",
         ctaSubmit: "Enviar",
-        formHref: "https://forms.gle/example", // <-- Actualizado
+        formHref: "https://forms.gle/example",
         labelEmail: "Tu correo electrónico",
         phEmail: "Tu correo electrónico",
         labelMessage: "Tu mensaje",
@@ -157,12 +179,12 @@ export const messages: Message = {
         members: [
           {
             name: "Martín Crosetto",
-            role: "Co-fundador y Desarrollador",
+            role: "Co-fundador e Ingeniero en Sistemas",
             photo: "martin.jpeg",
           },
           {
             name: "Valentino Lattanzi",
-            role: "Co-fundador y Desarrollador",
+            role: "Co-fundador e Ingeniero en Sistemas",
             photo: "valentino.jpeg",
           },
         ],
@@ -183,31 +205,52 @@ export const messages: Message = {
       contact: { label: "Contact", href: "#contact" },
     },
     hero: {
-      title: "We build custom software",
+      title: "WE BUILD CUSTOM INFORMATION SYSTEMS",
       subtitle:
-        "Websites, systems and automations focused on performance, design and results.",
+        "Focused on performance, design and results so your company can take the next step.",
       ctaPrimary: "See services",
       ctaSecondary: "Contact",
     },
     sections: {
       services: {
         title: "Services",
-        subtitle: "Explore the solutions we offer.",
+        subtitle: "We are information technology professionals. We provide solutions for different situations and needs.",
         items: [
           {
-            title: "Web Development",
+            icon: "web", // Web Development
+            title: "Web Systems",
             description:
-              "Creation of custom websites optimized for SEO and performance.",
+              "We create custom websites, optimized for SEO, performance, and user experience.",
           },
           {
-            title: "Custom Systems",
+            icon: "smartphone", // Mobile Development
+            title: "Mobile Systems",
             description:
-              "Development of systems tailored to the specific needs of your business.",
+              "Custom mobile applications for Android and iOS, tailored to your business needs.",
           },
           {
+            icon: "computer", // Desktop Development
+            title: "Desktop Systems",
+            description:
+              "Robust and efficient desktop systems for Windows, Mac, and Linux platforms.",
+          },
+          {
+            icon: "settings", // Process Automation
             title: "Process Automation",
             description:
-              "Implementation of solutions to automate repetitive tasks and improve efficiency.",
+              "Solutions to automate repetitive tasks and improve operational efficiency.",
+          },
+          {
+            icon: "build", // Custom Systems
+            title: "Custom Systems",
+            description:
+              "Development of custom systems that adapt to your company's processes and goals.",
+          },
+          {
+            icon: "search", // Survey and Consulting
+            title: "Survey and Consulting",
+            description:
+              "We analyze your processes and needs to define the best technological solution for your business.",
           },
         ],
       },
@@ -252,12 +295,12 @@ export const messages: Message = {
         members: [
           {
             name: "Martín Crosetto",
-            role: "Co-founder & Developer",
+            role: "Co-founder & Systems Engineer",
             photo: "martin.jpeg",
           },
           {
             name: "Valentino Lattanzi",
-            role: "Co-founder & Developer",
+            role: "Co-founder & Systems Engineer",
             photo: "valentino.jpeg",
           },
         ],
