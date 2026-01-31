@@ -57,3 +57,4 @@ export class EmailService {
     return { data, error: null, success: true };
   }
 }
+ 
