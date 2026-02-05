@@ -179,12 +179,12 @@ export const messages: Message = {
         members: [
           {
             name: "Martín Crosetto",
-            role: "Co-fundador e Ingeniero en Sistemas",
+            role: "Co-fundador",
             photo: "martin.jpeg",
           },
           {
             name: "Valentino Lattanzi",
-            role: "Co-fundador e Ingeniero en Sistemas",
+            role: "Co-fundador",
             photo: "valentino.jpeg",
           },
         ],
@@ -295,12 +295,12 @@ export const messages: Message = {
         members: [
           {
             name: "Martín Crosetto",
-            role: "Co-founder & Systems Engineer",
+            role: "Co-founder",
             photo: "martin.jpeg",
           },
           {
             name: "Valentino Lattanzi",
-            role: "Co-founder & Systems Engineer",
+            role: "Co-founder",
             photo: "valentino.jpeg",
           },
         ],
